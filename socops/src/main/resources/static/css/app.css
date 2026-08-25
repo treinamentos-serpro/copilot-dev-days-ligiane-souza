@@ -8,6 +8,135 @@ body {
     height: 100%;
     margin: 0;
 }
+    :root {
+        --ink: #102a43;
+        --ink-soft: #486581;
+        --navy: #082f49;
+        --navy-deep: #061f35;
+        --blue: #147dbe;
+        --blue-bright: #1d9bf0;
+        --sky: #e8f4fb;
+        --line: #d9e5ed;
+        --surface: #ffffff;
+        --canvas: #f4f8fb;
+        --success: #087f5b;
+        --success-soft: #d9f5e8;
+        --gold: #d39b27;
+        --shadow: 0 18px 45px rgba(8, 47, 73, 0.1);
+    }
+
+    html, body { height: 100%; margin: 0; }
+    body {
+        background: var(--canvas);
+        color: var(--ink);
+        font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+        -webkit-tap-highlight-color: transparent;
+    }
+    button { border: 0; font: inherit; cursor: pointer; }
+    button:focus-visible { outline: 3px solid #f4c95d; outline-offset: 3px; }
+
+    /* Lobby */
+    .lobby-shell {
+        min-height: 100%; display: flex; flex-direction: column; overflow: hidden;
+        background: var(--canvas);
+        background-image: linear-gradient(125deg, rgba(232, 244, 251, .75), transparent 48%), repeating-linear-gradient(90deg, transparent 0, transparent 79px, rgba(20, 125, 190, .035) 80px);
+    }
+    .brand-bar, .lobby-footer { display: flex; align-items: center; justify-content: space-between; padding: 26px clamp(24px, 7vw, 104px); }
+    .brand-bar { color: var(--navy); }
+    .brand-lockup { display: flex; align-items: center; gap: 10px; font-size: 17px; letter-spacing: .02em; }
+    .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; color: white; background: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: -.08em; }
+    .brand-name { font-weight: 700; }
+    .brand-context, .lobby-footer, .game-footer { color: var(--ink-soft); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .lobby-content { width: min(100% - 48px, 700px); margin: auto; padding: 48px 0 60px; animation: rise-in .65s ease both; }
+    .eyebrow, .section-kicker { color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; }
+    .eyebrow-line { width: 28px; height: 2px; background: var(--blue-bright); }
+    .lobby-content h1 { margin: 22px 0 20px; color: var(--navy-deep); font-size: clamp(42px, 7vw, 74px); line-height: .98; letter-spacing: -.055em; }
+    .lobby-content h1 span { color: var(--blue); }
+    .lobby-lead { max-width: 510px; margin: 0 0 36px; color: var(--ink-soft); font-size: 17px; line-height: 1.65; }
+    .how-panel { max-width: 560px; padding: 24px 0 8px; border-top: 1px solid var(--line); }
+    .how-panel h2 { margin: 10px 0 20px; color: var(--navy); font-size: 21px; }
+    .steps-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 0 0 30px; padding: 0; list-style: none; }
+    .steps-list li { display: flex; flex-direction: column; gap: 12px; color: var(--ink-soft); font-size: 13px; line-height: 1.5; }
+    .steps-list strong { color: var(--ink); }
+    .step-number { color: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+    .primary-action { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 55px; padding: 0 18px 0 22px; color: white; background: var(--blue); box-shadow: 0 8px 18px rgba(20, 125, 190, .22); font-weight: 700; text-align: left; transition: background .18s ease, transform .18s ease, box-shadow .18s ease; }
+    .primary-action:hover { background: var(--navy); box-shadow: 0 12px 24px rgba(8, 47, 73, .2); transform: translateY(-2px); }
+    .action-arrow { display: grid; place-items: center; width: 30px; height: 30px; background: rgba(255,255,255,.15); font-size: 20px; }
+    .privacy-note { color: var(--ink-soft); font-size: 11px; text-align: center; }
+    .privacy-note span { color: var(--success); font-size: 9px; }
+    .lobby-footer { margin-top: auto; border-top: 1px solid var(--line); }
+
+    /* Active game */
+    .game-shell { min-height: 100%; background: var(--canvas); }
+    .game-header { display: flex; align-items: center; justify-content: space-between; min-height: 68px; padding: 0 clamp(18px, 5vw, 72px); color: white; background: var(--navy-deep); }
+    .brand-lockup-light { color: white; }
+    .brand-lockup-light .brand-mark { background: var(--blue-bright); }
+    .back-button { padding: 9px 0; color: #b5c8d5; background: transparent; font-size: 12px; transition: color .18s ease; }
+    .back-button:hover { color: white; }
+    .back-button span { padding-right: 6px; font-size: 17px; vertical-align: -1px; }
+    .round-status { display: flex; align-items: center; gap: 8px; color: #b5c8d5; font-size: 11px; }
+    .status-dot { width: 7px; height: 7px; background: #51d88a; border-radius: 50%; box-shadow: 0 0 0 4px rgba(81,216,138,.14); }
+    .game-content { width: min(100% - 36px, 930px); margin: 0 auto; padding: 56px 0 44px; }
+    .game-intro { display: flex; align-items: end; justify-content: space-between; gap: 32px; margin-bottom: 30px; }
+    .eyebrow-blue { color: var(--blue); }
+    .game-intro h1 { margin: 12px 0 8px; color: var(--navy-deep); font-size: clamp(28px, 4vw, 42px); letter-spacing: -.04em; }
+    .game-intro p { max-width: 520px; margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.55; }
+    .progress-panel { flex: 0 0 150px; padding: 15px; border: 1px solid var(--line); background: var(--surface); }
+    .progress-label { display: block; margin-bottom: 4px; color: var(--ink-soft); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .progress-panel strong { color: var(--navy); font-size: 21px; }
+    .progress-track { display: block; height: 4px; margin-top: 12px; background: #e4edf2; }
+    .progress-track span { display: block; width: 0; height: 100%; background: var(--blue-bright); transition: width .3s ease; }
+    .bingo-banner { margin: 0 0 18px; padding: 13px 16px; color: var(--success); background: var(--success-soft); border-left: 3px solid var(--success); font-size: 13px; font-weight: 700; }
+    .bingo-banner span { margin-right: 8px; }
+    .board-heading { display: flex; justify-content: space-between; margin-bottom: 10px; color: var(--navy); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    .board-heading > span:last-child { color: var(--ink-soft); font-size: 10px; font-weight: 400; letter-spacing: .08em; }
+    .legend-swatch { display: inline-block; width: 8px; height: 8px; margin-right: 5px; background: var(--success); }
+    .board-frame { padding: 9px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .bingo-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 5px; width: 100%; aspect-ratio: 1; }
+    .bingo-tile { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; padding: 9px; color: var(--ink-soft); background: #fbfdfe; border: 1px solid var(--line); font-size: clamp(10px, 1.3vw, 13px); line-height: 1.3; text-align: center; user-select: none; transition: color .15s ease, background .15s ease, border .15s ease, transform .15s ease; }
+    .bingo-tile:hover:not(:disabled) { z-index: 1; color: var(--navy); background: var(--sky); border-color: var(--blue-bright); transform: translateY(-2px); }
+    .bingo-tile:active:not(:disabled) { transform: translateY(0); }
+    .bingo-tile.tile-marked { color: var(--success); background: var(--success-soft); border-color: #72cda6; font-weight: 700; }
+    .bingo-tile.tile-winning { color: #664800; background: #fff0c2; border-color: var(--gold); box-shadow: inset 0 0 0 2px rgba(211,155,39,.14); }
+    .bingo-tile.tile-free { color: white; background: var(--navy); border-color: var(--navy); font-size: clamp(11px, 1.6vw, 15px); font-weight: 700; letter-spacing: .05em; text-transform: uppercase; }
+    .tile-check { position: absolute; top: 5px; right: 6px; color: var(--success); font-size: 12px; }
+    .tile-winning .tile-check { color: #9c7016; }
+    .game-footnote { margin: 13px 0 0; color: var(--ink-soft); font-size: 11px; text-align: center; }
+    .game-footnote span { color: var(--blue); margin-right: 4px; }
+    .game-footer { display: flex; justify-content: space-between; padding: 0 18px 24px; }
+
+    /* Victory */
+    .victory-overlay { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(6, 31, 53, .78); }
+    .victory-dialog { width: min(100%, 390px); padding: 34px; background: var(--surface); box-shadow: 0 24px 70px rgba(0,0,0,.24); animation: dialog-in .35s ease both; }
+    .victory-icon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 24px; color: white; background: var(--success); font-size: 27px; }
+    .victory-dialog h2 { margin: 10px 0 8px; color: var(--navy-deep); font-size: 35px; letter-spacing: -.04em; }
+    .victory-dialog p { margin: 0 0 25px; color: var(--ink-soft); font-size: 14px; line-height: 1.6; }
+
+    @keyframes rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes dialog-in { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+    @media (max-width: 620px) {
+        .brand-bar, .lobby-footer { padding: 20px 24px; }
+        .brand-context, .lobby-footer span:nth-child(2) { display: none; }
+        .lobby-content { padding-top: 42px; }
+        .steps-list { grid-template-columns: 1fr; gap: 12px; }
+        .steps-list li { flex-direction: row; gap: 15px; }
+        .game-header { min-height: 62px; }
+        .game-header .brand-name { display: none; }
+        .round-status { font-size: 0; }
+        .game-content { width: min(100% - 24px, 930px); padding-top: 34px; }
+        .game-intro { display: block; margin-bottom: 24px; }
+        .progress-panel { margin-top: 20px; }
+        .board-frame { padding: 5px; }
+        .bingo-grid { gap: 3px; }
+        .bingo-tile { padding: 4px 2px; font-size: 9px; line-height: 1.18; }
+        .bingo-tile.tile-free { font-size: 10px; }
+        .tile-check { top: 2px; right: 3px; font-size: 9px; }
+        .game-footer { padding-bottom: 16px; }
+        .game-footer span:last-child { display: none; }
+        .victory-dialog { padding: 26px; }
+    }
 
 body {
     font-family: system-ui, -apple-system, sans-serif;

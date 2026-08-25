@@ -1,92 +1,88 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Soc Ops — Social Bingo</title>
     <link rel="stylesheet" th:href="@{/css/app.css}"/>
     <link rel="icon" type="image/png" th:href="@{/favicon.png}"/>
-    <style>
-        /* active-state tweaks that need pseudo-class selectors */
-        .tile-active:active { background-color: #f3f4f6 !important; }
-        .accent-active:active { background-color: #3b82f6 !important; }
-    </style>
 </head>
 <body class="h-full">
 
 <!-- ============================================================= -->
 <!--  LOBBY — visible before a game starts                          -->
 <!-- ============================================================= -->
-<div id="lobbyView" class="flex flex-col items-center justify-center min-h-full p-6 bg-gray-50">
-    <div class="text-center max-w-sm">
-        <h1 class="text-4xl font-bold text-gray-900 mb-2">Soc Ops</h1>
-        <p class="text-lg text-gray-600 mb-8">Social Bingo</p>
+<div id="lobbyView" class="lobby-shell">
+    <header class="brand-bar">
+        <div class="brand-lockup"><span class="brand-mark" aria-hidden="true">SO</span><span class="brand-name">Soc Ops</span></div>
+        <span class="brand-context">Encontro &middot; Social Bingo</span>
+    </header>
+    <main class="lobby-content">
+        <div class="eyebrow"><span class="eyebrow-line"></span> Dinâmica de integração</div>
+        <h1>Conecte pessoas.<br/><span>Complete a linha.</span></h1>
+        <p class="lobby-lead">Um bingo social para encontrar histórias em comum, iniciar conversas e tornar o encontro mais colaborativo.</p>
 
-        <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200 mb-8">
-            <h2 class="font-semibold text-gray-800 mb-3">How to play</h2>
-            <ul class="text-left text-gray-600 text-sm space-y-2">
-                <li>• Find people who match the questions</li>
-                <li>• Tap a square when you find a match</li>
-                <li>• Get 5 in a row to win!</li>
-            </ul>
-        </div>
+        <section class="how-panel" aria-labelledby="howTitle">
+            <div class="section-kicker">Como funciona</div>
+            <h2 id="howTitle">Três passos para começar</h2>
+            <ol class="steps-list">
+                <li><span class="step-number">01</span><span><strong>Encontre</strong> alguém que combine com uma pergunta.</span></li>
+                <li><span class="step-number">02</span><span><strong>Marque</strong> a casa depois de conversar.</span></li>
+                <li><span class="step-number">03</span><span><strong>Feche</strong> cinco casas em uma linha.</span></li>
+            </ol>
+        </section>
 
-        <button onclick="launchGame()"
-                class="w-full bg-accent text-white font-semibold py-4 px-8 rounded-lg text-lg accent-active transition-colors">
-            Start Game
-        </button>
-    </div>
+        <button onclick="launchGame()" class="primary-action" type="button"><span>Começar uma partida</span><span class="action-arrow" aria-hidden="true">&#8594;</span></button>
+        <p class="privacy-note"><span aria-hidden="true">&#9679;</span> Tabuleiro criado na hora &middot; sem cadastro</p>
+    </main>
+    <footer class="lobby-footer"><span>SO / 01</span><span>Social Operations</span><span>Pronto para conectar</span></footer>
 </div>
 
 <!-- ============================================================= -->
 <!--  ACTIVE GAME — board, header, optional bingo banner            -->
 <!-- ============================================================= -->
-<div id="activeView" class="flex flex-col min-h-full bg-gray-50" style="display:none">
+<div id="activeView" class="game-shell" style="display:none">
 
     <!-- top bar -->
-    <header class="flex items-center justify-between p-3 bg-white border-b border-gray-200">
-        <button onclick="retreatToLobby()"
-                class="text-gray-500 text-sm px-3 py-1\.5 rounded tile-active">
-            &#8592; Back
-        </button>
-        <h1 class="font-bold text-gray-900">Soc Ops</h1>
-        <div class="w-16"></div>
+    <header class="game-header">
+        <button onclick="retreatToLobby()" class="back-button" type="button"><span aria-hidden="true">&#8592;</span> Encerrar partida</button>
+        <div class="brand-lockup brand-lockup-light"><span class="brand-mark" aria-hidden="true">SO</span><span class="brand-name">Soc Ops</span></div>
+        <div class="round-status"><span class="status-dot"></span> Partida em andamento</div>
     </header>
 
-    <!-- hint -->
-    <p class="text-center text-gray-500 text-sm py-2 px-4">
-        Tap a square when you find someone who matches it.
-    </p>
+    <main class="game-content">
+        <div class="game-intro">
+            <div><div class="eyebrow eyebrow-blue"><span class="eyebrow-line"></span> Missão do encontro</div><h1>Encontre cinco em linha.</h1><p>Converse, descubra afinidades e marque cada pessoa que combina com uma casa.</p></div>
+            <div class="progress-panel"><span class="progress-label">Progresso</span><strong id="progressCount">0 / 24</strong><span class="progress-track"><span id="progressBar"></span></span></div>
+        </div>
 
-    <!-- bingo banner (hidden until victory) -->
-    <div id="bingoBanner"
-         class="bg-amber-100 text-amber-800 text-center py-2 font-semibold text-sm"
-         style="display:none">
-        &#127881; BINGO! You got a line!
-    </div>
+        <div id="bingoBanner" class="bingo-banner" role="status" aria-live="polite" style="display:none"><span aria-hidden="true">&#10003;</span> Linha completa. Bingo confirmado.</div>
 
-    <!-- the 5×5 grid -->
-    <div class="flex-1 flex items-center justify-center p-3">
+        <div class="board-heading"><span>Seu tabuleiro</span><span><span class="legend-swatch"></span> Casa marcada</span></div>
+        <div class="board-frame">
         <div id="gridContainer"
-             class="grid grid-cols-5 gap-1 w-full max-w-md mx-auto aspect-square">
+             class="bingo-grid" aria-label="Tabuleiro de bingo social">
             <!-- tiles injected by JS -->
         </div>
-    </div>
+        </div>
+        <p class="game-footnote"><span aria-hidden="true">&#9432;</span> O centro é uma casa livre e já conta para qualquer linha.</p>
+    </main>
+    <footer class="game-footer"><span>Social Operations</span><span>Converse com intenção.</span></footer>
 </div>
 
 <!-- ============================================================= -->
 <!--  VICTORY MODAL — overlays the board                            -->
 <!-- ============================================================= -->
 <div id="victoryOverlay"
-     class="fixed inset-0 bg-black\/50 flex items-center justify-center p-4 z-50"
+     class="victory-overlay"
+     role="dialog" aria-modal="true" aria-labelledby="victoryTitle"
      style="display:none">
-    <div class="bg-white rounded-xl p-6 max-w-xs w-full text-center shadow-xl animate-[bounce_0.5s_ease-out]">
-        <div class="text-5xl mb-4">&#127881;</div>
-        <h2 class="text-3xl font-bold text-amber-500 mb-2">BINGO!</h2>
-        <p class="text-gray-600 mb-6">You completed a line!</p>
-        <button onclick="dismissVictoryModal()"
-                class="w-full bg-accent text-white font-semibold py-3 px-6 rounded-lg accent-active transition-colors">
-            Keep Playing
+    <div class="victory-dialog">
+        <div class="victory-icon" aria-hidden="true">&#10003;</div>
+        <div class="section-kicker">Resultado confirmado</div>
+        <h2 id="victoryTitle">Bingo!</h2>
+        <p>Você completou uma linha e abriu uma nova conversa.</p>
+        <button onclick="dismissVictoryModal()" class="primary-action" type="button"><span>Continuar jogando</span><span class="action-arrow" aria-hidden="true">&#8594;</span>
         </button>
     </div>
 </div>
@@ -114,6 +110,8 @@
     var gridDiv    = document.getElementById("gridContainer");
     var bannerDiv  = document.getElementById("bingoBanner");
     var overlayDiv = document.getElementById("victoryOverlay");
+    var progressCount = document.getElementById("progressCount");
+    var progressBar = document.getElementById("progressBar");
 
     /* ── phase switching ──────────────────────────────────────── */
     function showPhase(phase) {
@@ -133,21 +131,18 @@
             var tile = liveTiles[t];
             var btn = document.createElement("button");
 
-            /* base styling identical to the original Blazor BingoSquare */
-            var base = "relative flex items-center justify-center p-1 text-center " +
-                       "border border-gray-300 rounded transition-all duration-150 " +
-                       "select-none min-h-[60px] text-xs leading-tight";
+            var base = "bingo-tile";
 
             var state;
             if (tile.selected) {
                 state = winIds[tile.id]
-                    ? "bg-amber-200 border-amber-400 text-amber-900"
-                    : "bg-marked border-marked-border text-green-800";
+                    ? "tile-winning"
+                    : "tile-marked";
             } else {
-                state = "bg-white text-gray-700 tile-active";
+                state = "";
             }
 
-            var extra = tile.freeCell ? " font-bold text-sm" : "";
+            var extra = tile.freeCell ? " tile-free" : "";
             btn.className = base + " " + state + extra;
 
             if (tile.freeCell) { btn.disabled = true; }
@@ -156,14 +151,14 @@
 
             /* inner label */
             var labelSpan = document.createElement("span");
-            labelSpan.className = "wrap-break-word hyphens-auto";
+            labelSpan.className = "tile-label";
             labelSpan.textContent = tile.prompt;
             btn.appendChild(labelSpan);
 
             /* check-mark for marked non-free tiles */
             if (tile.selected && !tile.freeCell) {
                 var tick = document.createElement("span");
-                tick.className = "absolute top-0.5 right-0.5 text-green-600 text-xs";
+                tick.className = "tile-check";
                 tick.textContent = "\u2713";
                 btn.appendChild(tick);
             }
@@ -175,6 +170,16 @@
 
             gridDiv.appendChild(btn);
         }
+        updateProgress();
+    }
+
+    function updateProgress() {
+        var marked = 0;
+        for (var i = 0; i < liveTiles.length; i++) {
+            if (liveTiles[i].selected && !liveTiles[i].freeCell) { marked++; }
+        }
+        progressCount.textContent = marked + " / 24";
+        progressBar.style.width = ((marked / 24) * 100) + "%";
     }
 
     /* ── tile tap logic ───────────────────────────────────────── */
