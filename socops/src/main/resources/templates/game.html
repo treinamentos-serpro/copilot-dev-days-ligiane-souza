@@ -18,9 +18,24 @@
         <span class="brand-context">Encontro &middot; Social Bingo</span>
     </header>
     <main class="lobby-content">
-        <div class="eyebrow"><span class="eyebrow-line"></span> Dinâmica de integração</div>
-        <h1>Conecte pessoas.<br/><span>Complete a linha.</span></h1>
-        <p class="lobby-lead">Um bingo social para encontrar histórias em comum, iniciar conversas e tornar o encontro mais colaborativo.</p>
+        <section class="lobby-stage" aria-labelledby="lobbyTitle">
+            <div class="lobby-board-motif" aria-hidden="true">
+                <div class="motif-grid">
+                    <span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell"></span>
+                    <span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell motif-free">Livre</span><span class="motif-cell"></span>
+                    <span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell motif-marked"></span><span class="motif-cell"></span><span class="motif-cell"></span>
+                    <span class="motif-cell"></span><span class="motif-cell motif-marked"></span><span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell"></span>
+                    <span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell"></span><span class="motif-cell motif-marked"></span>
+                </div>
+            </div>
+            <div class="lobby-copy">
+                <div class="eyebrow"><span class="eyebrow-line"></span> Dinâmica de integração</div>
+                <h1 id="lobbyTitle">Conecte pessoas.<br/><span>Complete a linha.</span></h1>
+                <p class="lobby-lead">Um bingo social para encontrar histórias em comum, iniciar conversas e tornar o encontro mais colaborativo.</p>
+                <button onclick="launchGame()" class="primary-action" type="button"><span>Começar uma partida</span><span class="action-arrow" aria-hidden="true">&#8594;</span></button>
+                <p class="privacy-note"><span aria-hidden="true">&#9679;</span> Tabuleiro criado na hora &middot; sem cadastro</p>
+            </div>
+        </section>
 
         <section class="how-panel" aria-labelledby="howTitle">
             <div class="section-kicker">Como funciona</div>
@@ -31,9 +46,6 @@
                 <li><span class="step-number">03</span><span><strong>Feche</strong> cinco casas em uma linha.</span></li>
             </ol>
         </section>
-
-        <button onclick="launchGame()" class="primary-action" type="button"><span>Começar uma partida</span><span class="action-arrow" aria-hidden="true">&#8594;</span></button>
-        <p class="privacy-note"><span aria-hidden="true">&#9679;</span> Tabuleiro criado na hora &middot; sem cadastro</p>
     </main>
     <footer class="lobby-footer"><span>SO / 01</span><span>Social Operations</span><span>Pronto para conectar</span></footer>
 </div>

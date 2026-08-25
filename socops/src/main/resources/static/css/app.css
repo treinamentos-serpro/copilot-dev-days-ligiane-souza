@@ -47,23 +47,30 @@ body {
     .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; color: white; background: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: -.08em; }
     .brand-name { font-weight: 700; }
     .brand-context, .lobby-footer, .game-footer { color: var(--ink-soft); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
-    .lobby-content { width: min(100% - 48px, 700px); margin: auto; padding: 48px 0 60px; animation: rise-in .65s ease both; }
+    .lobby-content { width: min(100% - 48px, 1080px); margin: auto; padding: 36px 0 44px; animation: rise-in .65s ease both; }
+    .lobby-stage { position: relative; display: grid; grid-template-columns: minmax(280px, 430px) minmax(290px, 460px); justify-content: space-between; align-items: center; gap: clamp(24px, 4vw, 60px); margin-bottom: 18px; }
+    .lobby-board-motif { position: relative; width: min(100%, 430px); aspect-ratio: 1; padding: clamp(12px, 2.5vw, 22px); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+    .motif-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; width: 100%; height: 100%; }
+    .motif-cell { display: grid; place-items: center; min-width: 0; color: #95adbf; background: #f8fcff; border: 1px solid #d7e6f1; font-size: 9px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+    .motif-cell.motif-marked { border-color: #73c4a3; background: var(--success-soft); }
+    .motif-cell.motif-free { color: white; background: var(--navy); border-color: var(--navy); }
+    .lobby-copy { position: relative; z-index: 1; margin-left: clamp(-88px, -7vw, 0px); padding: clamp(20px, 3.2vw, 30px); background: rgba(255, 255, 255, .94); border: 1px solid var(--line); backdrop-filter: blur(1px); }
     .eyebrow, .section-kicker { color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
     .eyebrow { display: flex; align-items: center; gap: 10px; }
     .eyebrow-line { width: 28px; height: 2px; background: var(--blue-bright); }
-    .lobby-content h1 { margin: 22px 0 20px; color: var(--navy-deep); font-size: clamp(42px, 7vw, 74px); line-height: .98; letter-spacing: -.055em; }
+    .lobby-content h1 { margin: 20px 0 16px; color: var(--navy-deep); font-size: clamp(38px, 6vw, 68px); line-height: .99; letter-spacing: -.055em; }
     .lobby-content h1 span { color: var(--blue); }
-    .lobby-lead { max-width: 510px; margin: 0 0 36px; color: var(--ink-soft); font-size: 17px; line-height: 1.65; }
-    .how-panel { max-width: 560px; padding: 24px 0 8px; border-top: 1px solid var(--line); }
-    .how-panel h2 { margin: 10px 0 20px; color: var(--navy); font-size: 21px; }
-    .steps-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 0 0 30px; padding: 0; list-style: none; }
+    .lobby-lead { max-width: 500px; margin: 0 0 24px; color: var(--ink-soft); font-size: 16px; line-height: 1.56; }
+    .how-panel { max-width: 710px; padding: 16px 0 0; border-top: 1px solid var(--line); }
+    .how-panel h2 { margin: 10px 0 16px; color: var(--navy); font-size: 19px; }
+    .steps-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0; padding: 0; list-style: none; }
     .steps-list li { display: flex; flex-direction: column; gap: 12px; color: var(--ink-soft); font-size: 13px; line-height: 1.5; }
     .steps-list strong { color: var(--ink); }
     .step-number { color: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
     .primary-action { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 55px; padding: 0 18px 0 22px; color: white; background: var(--blue); box-shadow: 0 8px 18px rgba(20, 125, 190, .22); font-weight: 700; text-align: left; transition: background .18s ease, transform .18s ease, box-shadow .18s ease; }
     .primary-action:hover { background: var(--navy); box-shadow: 0 12px 24px rgba(8, 47, 73, .2); transform: translateY(-2px); }
     .action-arrow { display: grid; place-items: center; width: 30px; height: 30px; background: rgba(255,255,255,.15); font-size: 20px; }
-    .privacy-note { color: var(--ink-soft); font-size: 11px; text-align: center; }
+    .privacy-note { margin-top: 10px; color: var(--ink-soft); font-size: 11px; text-align: center; }
     .privacy-note span { color: var(--success); font-size: 9px; }
     .lobby-footer { margin-top: auto; border-top: 1px solid var(--line); }
 
@@ -116,10 +123,20 @@ body {
     @keyframes rise-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes dialog-in { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
+    @media (max-width: 760px) {
+        .lobby-stage { grid-template-columns: 1fr; gap: 14px; margin-bottom: 12px; }
+        .lobby-board-motif { width: min(100%, 360px); margin: 0 auto; }
+        .lobby-copy { margin-left: 0; }
+    }
+
     @media (max-width: 620px) {
         .brand-bar, .lobby-footer { padding: 20px 24px; }
         .brand-context, .lobby-footer span:nth-child(2) { display: none; }
-        .lobby-content { padding-top: 42px; }
+        .lobby-content { width: min(100% - 24px, 1080px); padding-top: 24px; }
+        .lobby-board-motif { padding: 11px; }
+        .motif-grid { gap: 4px; }
+        .motif-cell { font-size: 8px; }
+        .lobby-copy { padding: 18px 16px; }
         .steps-list { grid-template-columns: 1fr; gap: 12px; }
         .steps-list li { flex-direction: row; gap: 15px; }
         .game-header { min-height: 62px; }
@@ -136,6 +153,16 @@ body {
         .game-footer { padding-bottom: 16px; }
         .game-footer span:last-child { display: none; }
         .victory-dialog { padding: 26px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .lobby-content,
+        .victory-dialog { animation: none; }
+        .primary-action,
+        .bingo-tile,
+        .progress-track span { transition: none; }
+        .primary-action:hover,
+        .bingo-tile:hover:not(:disabled) { transform: none; }
     }
 
 body {
