@@ -18,22 +18,35 @@
         <span class="brand-context">Encontro &middot; Social Bingo</span>
     </header>
     <main class="lobby-content">
-        <div class="eyebrow"><span class="eyebrow-line"></span> Dinâmica de integração</div>
-        <h1>Conecte pessoas.<br/><span>Complete a linha.</span></h1>
-        <p class="lobby-lead">Um bingo social para encontrar histórias em comum, iniciar conversas e tornar o encontro mais colaborativo.</p>
+        <section class="lobby-main" aria-labelledby="lobbyTitle">
+            <div class="lobby-briefing">
+                <div class="eyebrow"><span class="eyebrow-line"></span> Painel de missão</div>
+                <h1 id="lobbyTitle">Ative a rodada.<br/><span>Conquiste cinco em linha.</span></h1>
+                <p class="lobby-lead">Um lobby compacto para iniciar a dinâmica com foco: converse, identifique afinidades e marque o tabuleiro em tempo real.</p>
+                <button onclick="launchGame()" class="primary-action" type="button"><span>Iniciar partida agora</span><span class="action-arrow" aria-hidden="true">&#8594;</span></button>
+                <p class="privacy-note"><span aria-hidden="true">&#9679;</span> Tabuleiro gerado ao iniciar &middot; sem cadastro</p>
+            </div>
 
-        <section class="how-panel" aria-labelledby="howTitle">
-            <div class="section-kicker">Como funciona</div>
-            <h2 id="howTitle">Três passos para começar</h2>
-            <ol class="steps-list">
-                <li><span class="step-number">01</span><span><strong>Encontre</strong> alguém que combine com uma pergunta.</span></li>
-                <li><span class="step-number">02</span><span><strong>Marque</strong> a casa depois de conversar.</span></li>
-                <li><span class="step-number">03</span><span><strong>Feche</strong> cinco casas em uma linha.</span></li>
-            </ol>
+            <aside class="lobby-rail" aria-labelledby="railTitle">
+                <div class="rail-head">
+                    <span class="section-kicker">Prévia operacional</span>
+                    <h2 id="railTitle">Status da missão</h2>
+                </div>
+                <div class="rail-preview" aria-hidden="true">
+                    <span class="preview-cell">Networking ativo</span>
+                    <span class="preview-cell preview-cell-free">Livre</span>
+                    <span class="preview-cell">Linha em progresso</span>
+                    <span class="preview-cell">Conversa aberta</span>
+                    <span class="preview-cell">Conexão validada</span>
+                    <span class="preview-cell">Bingo em curso</span>
+                </div>
+                <dl class="rail-metadata">
+                    <div><dt>Cadastro</dt><dd>Não necessário</dd></div>
+                    <div><dt>Tabuleiro</dt><dd>Gerado no início</dd></div>
+                    <div><dt>Meta</dt><dd>Fechar 5 casas em linha</dd></div>
+                </dl>
+            </aside>
         </section>
-
-        <button onclick="launchGame()" class="primary-action" type="button"><span>Começar uma partida</span><span class="action-arrow" aria-hidden="true">&#8594;</span></button>
-        <p class="privacy-note"><span aria-hidden="true">&#9679;</span> Tabuleiro criado na hora &middot; sem cadastro</p>
     </main>
     <footer class="lobby-footer"><span>SO / 01</span><span>Social Operations</span><span>Pronto para conectar</span></footer>
 </div>
