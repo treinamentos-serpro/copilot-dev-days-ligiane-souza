@@ -47,24 +47,32 @@ body {
     .brand-mark { display: grid; place-items: center; width: 35px; height: 35px; color: white; background: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: -.08em; }
     .brand-name { font-weight: 700; }
     .brand-context, .lobby-footer, .game-footer { color: var(--ink-soft); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
-    .lobby-content { width: min(100% - 48px, 700px); margin: auto; padding: 48px 0 60px; animation: rise-in .65s ease both; }
+    .lobby-content { width: min(100% - 48px, 1080px); margin: auto; padding: 44px 0 60px; }
+    .lobby-editorial { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(30px, 5vw, 70px); align-items: center; }
+    .lobby-copy { animation: rise-in .6s ease both; }
     .eyebrow, .section-kicker { color: var(--blue); font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
     .eyebrow { display: flex; align-items: center; gap: 10px; }
     .eyebrow-line { width: 28px; height: 2px; background: var(--blue-bright); }
-    .lobby-content h1 { margin: 22px 0 20px; color: var(--navy-deep); font-size: clamp(42px, 7vw, 74px); line-height: .98; letter-spacing: -.055em; }
+    .lobby-content h1 { margin: 20px 0 18px; color: var(--navy-deep); font-size: clamp(40px, 6vw, 68px); line-height: .98; letter-spacing: -.055em; }
     .lobby-content h1 span { color: var(--blue); }
-    .lobby-lead { max-width: 510px; margin: 0 0 36px; color: var(--ink-soft); font-size: 17px; line-height: 1.65; }
-    .how-panel { max-width: 560px; padding: 24px 0 8px; border-top: 1px solid var(--line); }
-    .how-panel h2 { margin: 10px 0 20px; color: var(--navy); font-size: 21px; }
-    .steps-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin: 0 0 30px; padding: 0; list-style: none; }
-    .steps-list li { display: flex; flex-direction: column; gap: 12px; color: var(--ink-soft); font-size: 13px; line-height: 1.5; }
+    .lobby-lead { max-width: 520px; margin: 0 0 28px; color: var(--ink-soft); font-size: 16px; line-height: 1.65; }
+    .how-panel { max-width: 520px; padding: 20px 0 8px; border-top: 1px solid var(--line); }
+    .how-panel h2 { margin: 10px 0 16px; color: var(--navy); font-size: 21px; }
+    .steps-list { display: grid; gap: 11px; margin: 0 0 26px; padding: 0; list-style: none; }
+    .steps-list li { display: grid; grid-template-columns: auto 1fr; align-items: baseline; gap: 14px; color: var(--ink-soft); font-size: 13px; line-height: 1.5; }
     .steps-list strong { color: var(--ink); }
     .step-number { color: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
-    .primary-action { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 55px; padding: 0 18px 0 22px; color: white; background: var(--blue); box-shadow: 0 8px 18px rgba(20, 125, 190, .22); font-weight: 700; text-align: left; transition: background .18s ease, transform .18s ease, box-shadow .18s ease; }
+    .primary-action { display: flex; align-items: center; justify-content: space-between; width: min(100%, 420px); min-height: 55px; padding: 0 18px 0 22px; color: white; background: var(--blue); box-shadow: 0 8px 18px rgba(20, 125, 190, .22); font-weight: 700; text-align: left; transition: background .18s ease, transform .18s ease, box-shadow .18s ease; }
     .primary-action:hover { background: var(--navy); box-shadow: 0 12px 24px rgba(8, 47, 73, .2); transform: translateY(-2px); }
     .action-arrow { display: grid; place-items: center; width: 30px; height: 30px; background: rgba(255,255,255,.15); font-size: 20px; }
-    .privacy-note { color: var(--ink-soft); font-size: 11px; text-align: center; }
+    .privacy-note { color: var(--ink-soft); font-size: 11px; text-align: left; }
     .privacy-note span { color: var(--success); font-size: 9px; }
+    .lobby-preview { animation: rise-in .6s ease .08s both; }
+    .preview-frame { padding: 18px; border: 1px solid var(--line); background: #f8fbfd; box-shadow: var(--shadow); }
+    .preview-heading { display: flex; justify-content: space-between; margin-bottom: 12px; color: var(--ink-soft); font-size: 10px; letter-spacing: .11em; text-transform: uppercase; }
+    .preview-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+    .preview-grid span { display: grid; place-items: center; min-height: clamp(38px, 5.2vw, 56px); padding: 6px 4px; color: var(--ink-soft); background: var(--surface); border: 1px solid var(--line); font-size: clamp(9px, 1vw, 11px); font-weight: 700; line-height: 1.2; text-transform: uppercase; text-align: center; }
+    .preview-grid .preview-free { color: white; background: var(--navy); border-color: var(--navy); letter-spacing: .06em; }
     .lobby-footer { margin-top: auto; border-top: 1px solid var(--line); }
 
     /* Active game */
@@ -119,9 +127,18 @@ body {
     @media (max-width: 620px) {
         .brand-bar, .lobby-footer { padding: 20px 24px; }
         .brand-context, .lobby-footer span:nth-child(2) { display: none; }
-        .lobby-content { padding-top: 42px; }
-        .steps-list { grid-template-columns: 1fr; gap: 12px; }
-        .steps-list li { flex-direction: row; gap: 15px; }
+        .lobby-content { width: min(100% - 24px, 1080px); padding-top: 34px; }
+        .lobby-editorial { grid-template-columns: 1fr; gap: 22px; }
+        .lobby-content h1 { font-size: clamp(34px, 10vw, 50px); }
+        .lobby-lead { margin-bottom: 24px; }
+        .how-panel { padding-top: 16px; }
+        .steps-list li { gap: 11px; }
+        .primary-action { width: 100%; }
+        .privacy-note { text-align: center; }
+        .lobby-preview { max-width: 460px; margin: 0 auto; }
+        .preview-frame { padding: 14px; }
+        .preview-grid { gap: 4px; }
+        .preview-grid span { min-height: 34px; font-size: 9px; }
         .game-header { min-height: 62px; }
         .game-header .brand-name { display: none; }
         .round-status { font-size: 0; }
@@ -136,6 +153,13 @@ body {
         .game-footer { padding-bottom: 16px; }
         .game-footer span:last-child { display: none; }
         .victory-dialog { padding: 26px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .lobby-copy,
+        .lobby-preview {
+            animation: none;
+        }
     }
 
 body {
